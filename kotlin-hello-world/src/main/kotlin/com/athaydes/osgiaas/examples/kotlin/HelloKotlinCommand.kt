@@ -1,4 +1,4 @@
-package com.athaydes.osgiaas.examples.java
+package com.athaydes.osgiaas.examples.kotlin
 
 import com.athaydes.osgiaas.cli.CommandHelper
 import org.apache.felix.shell.Command
@@ -6,7 +6,7 @@ import org.osgi.service.component.annotations.Component
 import java.io.PrintStream
 
 @Component(immediate = true, name = "hello-kotlin")
-class HelloJavaCommand : Command {
+class HelloKotlinCommand : Command {
 
     override fun getName() = "hello-kotlin"
 

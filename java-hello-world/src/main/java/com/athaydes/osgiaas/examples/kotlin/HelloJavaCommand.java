@@ -1,4 +1,4 @@
-package com.athaydes.osgiaas.examples.java;
+package com.athaydes.osgiaas.examples.kotlin;
 
 import com.athaydes.osgiaas.cli.CommandHelper;
 import org.apache.felix.shell.Command;
