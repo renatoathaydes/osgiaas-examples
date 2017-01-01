@@ -2,20 +2,22 @@ package com.athaydes.osgiaas.examples.java;
 
 import com.athaydes.osgiaas.cli.CommandHelper;
 import org.apache.felix.shell.Command;
+import org.osgi.service.component.annotations.Component;
 
 import java.io.PrintStream;
 import java.util.List;
 
+@Component(immediate = true, name = "hello-java")
 public class HelloJavaCommand implements Command {
 
     @Override
     public String getName() {
-        return "hello-java-command";
+        return "hello-java";
     }
 
     @Override
     public String getUsage() {
-        return "hello-java-command <message>?";
+        return "hello-java [<message>]";
     }
 
     @Override
