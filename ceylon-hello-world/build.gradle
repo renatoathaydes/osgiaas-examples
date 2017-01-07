@@ -1,0 +1,65 @@
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+
+plugins {
+    id 'com.athaydes.ceylon' version '1.3.0'
+    id 'org.dm.bundle' version '0.9.0'
+    id 'com.athaydes.osgi-run' version '1.5.4'
+}
+
+group 'com.athaydes.osgiaas'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenLocal()
+}
+
+dependencies {
+    osgiRuntime 'org.apache.felix:org.apache.felix.scr:2.0.2', {
+        transitive = false
+    }
+    // OBR CLI commands
+    osgiRuntime 'org.apache.felix:org.apache.felix.bundlerepository:2.0.6', {
+        transitive = false
+    }
+    osgiRuntime 'com.athaydes.osgiaas:osgiaas-cli-core:1.0-SNAPSHOT'
+}
+
+runOsgi {
+    bundles = [ project ]
+}
+
+bundle {
+    instruction '-dsannotations', '*'
+}
+
+ceylon {
+    module = 'com.athaydes.osgiaas.examples.ceylon'
+}
+
+def compileCeylon = tasks.compileCeylon
+
+tasks.createOsgiRuntime.dependsOn compileCeylon
+
+// once the Ceylon compiler is done creating the car file, copy it into the OSGi environment.
+// This needs to be done programmatically because osgi-run cannot see the Ceylon car file.
+compileCeylon.doLast {
+    File osgiOutDir = runOsgi.outDir instanceof File ?
+            runOsgi.outDir :
+            new File( project.buildDir, runOsgi.outDir as String )
+
+    File destinationDir = new File( osgiOutDir, runOsgi.bundlesPath as String )
+
+    fileTree( ceylon.output ) {
+        include '**/*.car'
+    }.each { File file ->
+        def jarName = ( file.name - '.car' ) + '.jar'
+        destinationDir.mkdirs()
+        File jar = new File( destinationDir, jarName )
+        println "Writing jar: $jar"
+        Files.copy( file.toPath(), jar.toPath(), StandardCopyOption.REPLACE_EXISTING )
+    }
+}
