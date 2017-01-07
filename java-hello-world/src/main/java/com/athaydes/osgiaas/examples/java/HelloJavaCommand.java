@@ -1,4 +1,4 @@
-package com.athaydes.osgiaas.examples.kotlin;
+package com.athaydes.osgiaas.examples.java;
 
 import com.athaydes.osgiaas.cli.CommandHelper;
 import org.apache.felix.shell.Command;
@@ -7,7 +7,7 @@ import org.osgi.service.component.annotations.Component;
 import java.io.PrintStream;
 import java.util.List;
 
-@Component(immediate = true, name = "hello-java")
+@Component( immediate = true, name = "hello-java" )
 public class HelloJavaCommand implements Command {
 
     @Override
@@ -38,15 +38,15 @@ public class HelloJavaCommand implements Command {
         // notice that the first part is always the name of the command itself.
         List<String> arguments = CommandHelper.breakupArguments( line );
 
-        if ( arguments.size() == 1 ) {
-            // no arguments provided by the user
-            out.println( "Hello Java!" );
-        } else if ( arguments.size() == 2 ) {
-            // The user gave an argument, print the argument instead
-            out.println( "Hello " + arguments.get( 1 ) );
-        } else {
-            // too many arguments provided by the user
-            CommandHelper.printError( err, getUsage(), "Too many arguments" );
+        switch ( arguments.size() ) {
+            case 1:// no arguments provided by the user
+                out.println( "Hello Java!" );
+                break;
+            case 2:// The user gave an argument, print the argument instead
+                out.println( "Hello " + arguments.get( 1 ) );
+                break;
+            default: // too many arguments provided by the user
+                CommandHelper.printError( err, getUsage(), "Too many arguments" );
         }
     }
 

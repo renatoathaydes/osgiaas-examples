@@ -28,10 +28,13 @@ class HelloScalaCommand extends Command {
     val arguments = CommandHelper.breakupArguments(line)
 
     arguments.size match {
+      // no arguments provided by the user
       case 1 => out.println("Hello Scala!")
+      // The user gave an argument, print the argument instead
       case 2 => out.println("Hello " + arguments.get(1))
       // too many arguments provided by the user
       case _ => CommandHelper.printError(err, getUsage, "Too many arguments")
     }
   }
+
 }

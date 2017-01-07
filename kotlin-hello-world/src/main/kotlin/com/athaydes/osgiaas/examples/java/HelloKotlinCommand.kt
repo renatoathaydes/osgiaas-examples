@@ -1,4 +1,4 @@
-package com.athaydes.osgiaas.examples.kotlin
+package com.athaydes.osgiaas.examples.java
 
 import com.athaydes.osgiaas.cli.CommandHelper
 import org.apache.felix.shell.Command
@@ -32,7 +32,7 @@ class HelloKotlinCommand : Command {
             2 -> // The user gave an argument, print the argument instead
                 out.println("Hello " + arguments[1])
             else -> // too many arguments provided by the user
-                CommandHelper.printError(err, usage, "Too many arguments");
+                CommandHelper.printError(err, usage, "Too many arguments")
         }
     }
 
