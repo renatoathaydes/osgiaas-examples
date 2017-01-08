@@ -14,13 +14,15 @@ repositories {
     mavenLocal()
 }
 
+final osgiaasVersion = '0.5'
+
 dependencies {
-    compile "com.athaydes.osgiaas:osgiaas-cli-api:1.0-SNAPSHOT"
+    compile "com.athaydes.osgiaas:osgiaas-cli-api:$osgiaasVersion"
     compile "org.osgi:org.osgi.service.component.annotations:1.3.0"
     compile "org.codehaus.groovy:groovy-all:2.4.7"
 
     osgiRuntime 'org.apache.felix:org.apache.felix.scr:2.0.2'
-    osgiRuntime 'com.athaydes.osgiaas:osgiaas-cli-core:1.0-SNAPSHOT'
+    osgiRuntime "com.athaydes.osgiaas:osgiaas-cli-core:$osgiaasVersion"
 }
 
 runOsgi {
