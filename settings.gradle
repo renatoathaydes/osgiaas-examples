@@ -1,3 +1,4 @@
 rootProject.name = 'osgiaas-examples'
 
-include 'java-hello-world', 'kotlin-hello-world', 'groovy-hello-world', 'scala-hello-world'
+include 'java-hello-world', 'kotlin-hello-world', 'groovy-hello-world', 'scala-hello-world',
+        'weather-command'
